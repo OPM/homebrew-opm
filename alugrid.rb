@@ -13,6 +13,7 @@ class Alugrid < Formula
 #  depends_on :mpi => [:cc, :cxx, :recommended]
   option 'with-mpi', 'Enable MPI support'
   depends_on 'openmpi' if build.with? 'mpi'
+  option 'with-c++11' if MacOS.version >= :lion
 
   def patches
     # remove the misguided idea that the major number should always be increased
@@ -34,6 +35,11 @@ class Alugrid < Formula
     # if we are building with metis support, then inform where it is
     if build.with? 'metis'
       args << "--with-metis=#{Formula.factory('metis').opt_prefix}"
+    end
+
+    # use C++11 runtime library
+    if MacOS.version >= :lion and build.with? 'c++11'
+      ENV.append 'CXX', '-std=c++11 -stdlib=libc++'
     end
 
     # there is a test which includes stdlib.h, which apparently needs
@@ -92,3 +98,34 @@ __END__
  	freebsd-aout)
  	  major=".$current"
  	  versuffix=".$current.$revision";
+--- old/src/serial/gitter_sti.cc
++++ new/src/serial/gitter_sti.cc
+@@ -508,7 +508,7 @@
+ 
+ void Gitter :: backup (ostream & out) 
+ {
+-  assert (debugOption (20) ? (cout << "**INFO Gitter :: backup (ostream & = " << out << ") " << endl, 1) : 1) ;
++  assert (debugOption (20) ? (cout << "**INFO Gitter :: backup (ostream & = " << &out << ") " << endl, 1) : 1) ;
+   {
+     AccessIterator <hedge_STI> :: Handle fw (container ()) ;
+     for (fw.first(); !fw.done(); fw.next()) fw.item ().backup (out) ; 
+@@ -525,7 +525,7 @@
+ }
+ 
+ void Gitter ::restore (istream & in) {
+-  assert (debugOption (20) ? (cout << "**INFO Gitter :: restore (istream & = " << in << ") " << endl, 1) : 1) ;  
++  assert (debugOption (20) ? (cout << "**INFO Gitter :: restore (istream & = " << &in << ") " << endl, 1) : 1) ;  
+   {
+     AccessIterator < hedge_STI > :: Handle ew (container ());
+     for (ew.first () ; !ew.done () ; ew.next ()) ew.item ().restore (in) ;
+--- old/src/duneinterface/gitter_dune_pll_impl.cc
++++ new/src/duneinterface/gitter_dune_pll_impl.cc
+@@ -1899,7 +1899,7 @@
+ void GitterDunePll ::restore (istream & in) 
+ {
+   typedef Gitter :: Geometric :: BuilderIF BuilderIF;
+-  assert (debugOption (20) ? (cout << "**INFO GitterDunePll :: restore (istream & = " << in << ") " << endl, 1) : 1) ;
++  assert (debugOption (20) ? (cout << "**INFO GitterDunePll :: restore (istream & = " << &in << ") " << endl, 1) : 1) ;
+   {
+     AccessIterator < hedge_STI > :: Handle ew (container ());
+     for (ew.first () ; !ew.done () ; ew.next ()) ew.item ().restore (in) ;
