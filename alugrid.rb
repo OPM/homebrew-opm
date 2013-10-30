@@ -39,7 +39,10 @@ class Alugrid < Formula
 
     # use C++11 runtime library
     if MacOS.version >= :lion and build.with? 'c++11'
-      ENV.append 'CXX', '-std=c++11 -stdlib=libc++'
+      ENV.append 'CXX', '-std=c++11'
+      if ENV.compiler == :clang
+        ENV.append 'CXX', '-stdlib=libc++'
+      end
     end
 
     # there is a test which includes stdlib.h, which apparently needs
