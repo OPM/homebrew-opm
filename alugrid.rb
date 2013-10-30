@@ -10,9 +10,8 @@ class Alugrid < Formula
   depends_on 'automake' => :build
   depends_on 'libtool' => :build
   depends_on 'metis' => :recommended 
-#  depends_on :mpi => [:cc, :cxx, :recommended]
   option 'with-mpi', 'Enable MPI support'
-  depends_on 'openmpi' if build.with? 'mpi'
+  depends_on MPIDependency.new(:cxx) if build.with? "mpi"
   option 'with-c++11' if MacOS.version >= :lion
 
   def patches
