@@ -44,7 +44,7 @@ class Superlu < Formula
     # should be in /usr/local/lib/ and libblas in /Applications/Xcode.app/
     # Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/
     # MacOSX10.8.sdk/usr/lib/
-    deps = %w[-lcolamd -lblas]
+    deps = %w[-lcolamd -lblas -lsuitesparseconfig]
 
     # build using the modified Makefile; we only need the library
     # so just build the source directory
