@@ -84,7 +84,7 @@ class Libf2c < Formula
     # test program written in pure C (since this is only the runtime
     # library; we don't install the compiler itself)
     # this is a classic "Hello, World!" program translated from Fortran
-    File::open ("hello.c", "w") do |f|
+    File::open("hello.c", "w") do |f|
       f << <<-EOF.undent
         #include "f2c.h"
 
