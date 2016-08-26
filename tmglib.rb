@@ -4,7 +4,7 @@ require 'formula'
 class Tmglib < Formula
   homepage 'http://www.netlib.org/lapack/'
   url 'http://www.netlib.org/lapack/lapack-3.4.2.tgz'
-  sha1 '93a6e4e6639aaf00571d53a580ddc415416e868b'
+  sha256 '60a65daaf16ec315034675942618a2230521ea7adf85eea788ee54841072faf0'
 
   def install
     # we need Fortran to compile

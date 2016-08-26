@@ -4,7 +4,7 @@ require 'formula'
 class DuneCommon < Formula
   homepage 'http://www.dune-project.org/'
   url 'http://www.dune-project.org/download/2.2.1/dune-common-2.2.1.tar.gz'
-  sha1 '9a9888924daf029e48b01b174adeb1472daa827b'
+  sha256 '6b16b2390af79e2ca93367c95d06ed536b58422034cf34e4437fc6201bb1ab85'
 
   depends_on 'autoconf'  => :build
   depends_on 'automake'  => :build
