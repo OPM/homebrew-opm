@@ -4,7 +4,7 @@ require 'formula'
 class Tinyxml < Formula
   homepage 'http://grinninglizard.com/tinyxml/'
   url      'http://downloads.sf.net/project/tinyxml/tinyxml/2.6.2/tinyxml_2_6_2.zip'
-  sha1     'a425a22ff331dafa570b2a508a37a85a4eaa4127'
+  sha256   'ac6bb9501c6f50cc922d22f26b02fab168db47521be5e845b83d3451a3e1d512'
 
   option 'with-c++11' if MacOS.version >= :lion
 

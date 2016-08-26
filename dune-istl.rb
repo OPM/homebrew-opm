@@ -4,7 +4,7 @@ require 'formula'
 class DuneIstl < Formula
   homepage 'http://www.dune-project.org/'
   url 'http://www.dune-project.org/download/2.2.1/dune-istl-2.2.1.tar.gz'
-  sha1 'e213d2daa5c5f330d397e7951544170151042f8d'
+  sha256 'cbc125f52283afae49ed7be2dca3d05cdc5ca5abbe014183474c1af97aeb0a61'
 
   depends_on 'autoconf'  => :build
   depends_on 'automake'  => :build
